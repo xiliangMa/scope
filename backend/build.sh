@@ -18,3 +18,4 @@ echo "weave:*:::::::" >>/etc/shadow
 echo "weave	ALL=(ALL)	NOPASSWD: ALL" >>/etc/sudoers
 
 su weave -c "PATH=$PATH make -C $SCOPE_SRC BUILD_IN_CONTAINER=false $*"
+#su root -c "PATH=$PATH make -C $SCOPE_SRC BUILD_IN_CONTAINER=false $*"

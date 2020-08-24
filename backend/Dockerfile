@@ -14,6 +14,8 @@ RUN set -eux; \
 RUN go clean -i net && \
 	go install -tags netgo std && \
    export arch_val="$(dpkg --print-architecture)"; \
+   export GOPROXY=https://goproxy.io; \
+   export GO111MODULE=on; \
    if [ "$arch_val" != "ppc64el" ]; then \
 	go install -race -tags netgo std; \
    fi; \
@@ -44,9 +46,11 @@ RUN export arch_val="$(dpkg --print-architecture)"; \
     if [ "$arch_val" = "arm64" ]; then \
         curl -fsSLO https://download.docker.com/linux/static/stable/aarch64/docker-${DOCKERVERSION}.tgz; \
     elif [ "$arch_val" = "amd64" ]; then \
-        curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz; \
+        #curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz; \
+        curl -fOk https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz; \
     elif [ "$arch_val" = "ppc64el" ]; then \
-        curl -fsSLO https://download.docker.com/linux/static/stable/ppc64le/docker-${DOCKERVERSION}.tgz; \
+        #curl -fsSLO https://download.docker.com/linux/static/stable/ppc64le/docker-${DOCKERVERSION}.tgz; \
+        curl -fOk https://download.docker.com/linux/static/stable/ppc64le/docker-${DOCKERVERSION}.tgz; \
     else \
         echo "No Docker client found for architecture $(arch_val)." && \
         exit 1; \
