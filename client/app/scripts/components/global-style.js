@@ -144,7 +144,7 @@ const GlobalStyle = createGlobalStyle`
     right: 0;
     top: 0;
     width: 100%;
-  
+
     a {
       text-decoration: none;
     }
@@ -1343,13 +1343,13 @@ const GlobalStyle = createGlobalStyle`
           text-align: center;
         }
       }
-      
+
         &:last-child :hover {
         height: auto;
         max-height: calc((13px * 1.5 + 3px + 3px) * 8); /* expand to display 8 rows */
         overflow: auto;
         transition: max-height 0.5s 0s ${scopeTheme('baseEase')};
-      } 
+      }
 
       font-size: ${fontSize('small')};
 
@@ -1443,7 +1443,7 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
-    /*   
+    /*
     Help panel!
     */
 
@@ -1605,7 +1605,7 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
-    /*   
+    /*
     Zoom control
     */
 
@@ -1624,7 +1624,7 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
-    /*   
+    /*
     Debug panel!
     */
 
@@ -1655,7 +1655,7 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
-    /*   
+    /*
     Nodes grid.
     */
 

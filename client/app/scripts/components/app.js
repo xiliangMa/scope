@@ -9,7 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import commonTheme from 'weaveworks-ui-components/lib/theme';
 
 import GlobalStyle from './global-style';
-import Logo from './logo';
+// import Logo from './logo';
 import Footer from './footer';
 import Sidebar from './sidebar';
 import HelpPanel from './help-panel';
@@ -205,7 +205,7 @@ class App extends React.Component {
       'contrast-mode': contrastMode,
       'time-travel-open': timeTravelSupported,
     });
-    const isIframe = window !== window.top;
+    // const isIframe = window !== window.top;
 
     return (
       <ThemeProvider theme={{...commonTheme, scope: contrastMode ? contrastTheme : defaultTheme }}>
@@ -229,7 +229,7 @@ class App extends React.Component {
               {timeTravelSupported && this.props.renderTimeTravel()}
 
               <div className="selectors">
-                <div className="logo">
+                {/* <div className="logo">
                   {!isIframe
                     && (
                     <svg width="100%" height="100%" viewBox="0 0 1089 217">
@@ -237,7 +237,7 @@ class App extends React.Component {
                     </svg>
                     )
                   }
-                </div>
+                </div> */}
                 <Search />
                 <Topologies />
                 <ViewModeSelector />

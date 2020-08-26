@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Plugins from './plugins';
+// import Plugins from './plugins';
 import { trackAnalyticsEvent } from '../utils/tracking-utils';
 import {
   clickDownloadGraph,
@@ -27,21 +27,24 @@ class Footer extends React.Component {
   }
 
   render() {
+    // const {
+    //   hostname, version, versionUpdate, contrastMode
+    // } = this.props;
     const {
-      hostname, version, versionUpdate, contrastMode
+      contrastMode
     } = this.props;
 
     const otherContrastModeTitle = contrastMode
       ? 'Switch to normal contrast' : 'Switch to high contrast';
     const forceRelayoutTitle = 'Force re-layout (might reduce edge crossings, '
       + 'but may shift nodes around)';
-    const versionUpdateTitle = versionUpdate
-      ? `New version available: ${versionUpdate.get('version')} Click to download`
-      : '';
+    // const versionUpdateTitle = versionUpdate
+    //   ? `New version available: ${versionUpdate.get('version')} Click to download`
+    //   : '';
 
     return (
       <div className="footer">
-        <div className="footer-status">
+        {/* <div className="footer-status">
           {versionUpdate
             && (
               <a
@@ -64,7 +67,7 @@ class Footer extends React.Component {
 
         <div className="footer-plugins">
           <Plugins />
-        </div>
+        </div> */}
 
         <div className="footer-tools">
           <button
