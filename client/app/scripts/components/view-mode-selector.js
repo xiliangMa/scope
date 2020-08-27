@@ -29,19 +29,19 @@ class ViewModeSelector extends React.Component {
       <div className="view-mode-selector">
         <div className="tour-step-anchor view-mode-selector-wrapper">
           <ViewModeButton
-            label="Graph"
+            label="图表"
             icons="fa fa-sitemap"
             viewMode={GRAPH_VIEW_MODE}
             onClick={this.props.setGraphView}
           />
           <ViewModeButton
-            label="Table"
+            label="表格"
             icons="fa fa-table"
             viewMode={TABLE_VIEW_MODE}
             onClick={this.props.setTableView}
           />
           <ViewModeButton
-            label="Resources"
+            label="资源"
             icons="fa fa-chart-bar"
             viewMode={RESOURCE_VIEW_MODE}
             onClick={this.props.setResourceView}

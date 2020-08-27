@@ -52,7 +52,7 @@ class TimeControl extends React.Component {
               disabled={!topologiesLoaded}
               title="Show live state of the system">
               {!isPaused && <i className="fa fa-play" />}
-              <span className="label">Live</span>
+              <span className="label">实时</span>
             </span>
             <span
               className={className(isPaused)}
@@ -60,7 +60,7 @@ class TimeControl extends React.Component {
               disabled={!topologiesLoaded}
               title="Pause updates (freezes the nodes in their current layout)">
               {isPaused && <i className="fa fa-pause" />}
-              <span className="label">{isPaused ? 'Paused' : 'Pause'}</span>
+              <span className="label">{isPaused ? '已暂停' : '暂停'}</span>
             </span>
           </div>
         </div>

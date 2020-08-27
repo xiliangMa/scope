@@ -48,9 +48,9 @@ export const METRIC_LABELS = {
   load1: 'Load 1',
   load5: 'Load 5',
   load15: 'Load 15',
-  open_files_count: 'Open files',
+  open_files_count: '打开文件',
   process_cpu_usage_percent: 'CPU',
-  process_memory_usage_bytes: 'Memory'
+  process_memory_usage_bytes: '内存'
 };
 
 

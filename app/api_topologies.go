@@ -36,6 +36,8 @@ const (
 	ecsTasksID             = "ecs-tasks"
 	ecsServicesID          = "ecs-services"
 	swarmServicesID        = "swarm-services"
+	showUncontained = "显示未被编排"
+	hideUncontained = "隐藏未被编排"
 )
 
 var (
@@ -128,7 +130,7 @@ func updateKubeFilters(rpt report.Report, topologies []APITopologyDesc) []APITop
 	for i, t := range topologies {
 		if t.id == containersID || t.id == podsID || t.id == servicesID || t.id == kubeControllersID {
 			topologies[i] = mergeTopologyFilters(t, []APITopologyOptionGroup{
-				namespaceFilters(ns, "All Namespaces"),
+				namespaceFilters(ns, "所有命名空间"),
 			})
 		}
 	}
@@ -167,25 +169,25 @@ func MakeRegistry() *Registry {
 			ID:      systemGroupID,
 			Default: "application",
 			Options: []APITopologyOption{
-				{Value: "all", Label: "All", filter: nil, filterPseudo: false},
-				{Value: "system", Label: "System containers", filter: render.IsSystem, filterPseudo: false},
-				{Value: "application", Label: "Application containers", filter: render.IsApplication, filterPseudo: false}},
+				{Value: "all", Label: "所有", filter: nil, filterPseudo: false},
+				{Value: "system", Label: "系统容器", filter: render.IsSystem, filterPseudo: false},
+				{Value: "application", Label: "应用容器", filter: render.IsApplication, filterPseudo: false}},
 		},
 		{
 			ID:      "stopped",
 			Default: "running",
 			Options: []APITopologyOption{
-				{Value: "stopped", Label: "Stopped containers", filter: render.IsStopped, filterPseudo: false},
-				{Value: "running", Label: "Running containers", filter: render.IsRunning, filterPseudo: false},
-				{Value: "both", Label: "Both", filter: nil, filterPseudo: false},
+				{Value: "stopped", Label: "停止容器", filter: render.IsStopped, filterPseudo: false},
+				{Value: "running", Label: "运行容器", filter: render.IsRunning, filterPseudo: false},
+				{Value: "both", Label: "所有", filter: nil, filterPseudo: false},
 			},
 		},
 		{
 			ID:      "pseudo",
 			Default: "hide",
 			Options: []APITopologyOption{
-				{Value: "show", Label: "Show uncontained", filter: nil, filterPseudo: false},
-				{Value: "hide", Label: "Hide uncontained", filter: render.IsNotPseudo, filterPseudo: true},
+				{Value: "show", Label: showUncontained, filter: nil, filterPseudo: false},
+				{Value: "hide", Label: hideUncontained, filter: render.IsNotPseudo, filterPseudo: true},
 			},
 		},
 	}
@@ -195,8 +197,8 @@ func MakeRegistry() *Registry {
 			ID:      "unconnected",
 			Default: "hide",
 			Options: []APITopologyOption{
-				{Value: "show", Label: "Show unconnected", filter: nil, filterPseudo: false},
-				{Value: "hide", Label: "Hide unconnected", filter: render.IsConnected, filterPseudo: false},
+				{Value: "show", Label: showUncontained, filter: nil, filterPseudo: false},
+				{Value: "hide", Label: hideUncontained, filter: render.IsConnected, filterPseudo: false},
 			},
 		},
 	}
@@ -207,7 +209,8 @@ func MakeRegistry() *Registry {
 		APITopologyDesc{
 			id:          processesID,
 			renderer:    render.ConnectedProcessRenderer,
-			Name:        "Processes",
+			//Name:        "Processes",
+			Name:        "进程",
 			Rank:        1,
 			Options:     unconnectedFilter,
 			HideIfEmpty: true,
@@ -216,14 +219,16 @@ func MakeRegistry() *Registry {
 			id:          processesByNameID,
 			parent:      processesID,
 			renderer:    render.ProcessNameRenderer,
-			Name:        "by name",
+			//Name:        "by name",
+			Name:        "名称",
 			Options:     unconnectedFilter,
 			HideIfEmpty: true,
 		},
 		APITopologyDesc{
 			id:       containersID,
 			renderer: render.ContainerWithImageNameRenderer,
-			Name:     "Containers",
+			//Name:     "Containers",
+			Name:     "容器",
 			Rank:     2,
 			Options:  containerFilters,
 		},
@@ -231,14 +236,17 @@ func MakeRegistry() *Registry {
 			id:       containersByHostnameID,
 			parent:   containersID,
 			renderer: render.ContainerHostnameRenderer,
-			Name:     "by DNS name",
+			//Name:     "by DNS name",
+			Name:     "" +
+				"DNS",
 			Options:  containerFilters,
 		},
 		APITopologyDesc{
 			id:       containersByImageID,
 			parent:   containersID,
 			renderer: render.ContainerImageRenderer,
-			Name:     "by image",
+			//Name:     "by image",
+			Name:     "镜像",
 			Options:  containerFilters,
 		},
 		APITopologyDesc{
@@ -253,7 +261,7 @@ func MakeRegistry() *Registry {
 			id:          kubeControllersID,
 			parent:      podsID,
 			renderer:    render.KubeControllerRenderer,
-			Name:        "Controllers",
+			Name:        "控制器",
 			Options:     []APITopologyOptionGroup{unmanagedFilter},
 			HideIfEmpty: true,
 		},
@@ -292,14 +300,14 @@ func MakeRegistry() *Registry {
 		APITopologyDesc{
 			id:       hostsID,
 			renderer: render.HostRenderer,
-			Name:     "Hosts",
+			Name:     "主机",
 			Rank:     4,
 		},
 		APITopologyDesc{
 			id:       weaveID,
 			parent:   hostsID,
 			renderer: render.WeaveRenderer,
-			Name:     "Weave Net",
+			Name:     "网络",
 		},
 	)
 
